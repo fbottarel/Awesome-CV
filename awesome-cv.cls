@@ -80,7 +80,15 @@
 % Needed to deal a paragraphs
 \RequirePackage{parskip}
 % Needed to deal hyperlink
-\RequirePackage[hidelinks,unicode]{hyperref}
+\RequirePackage[colorlinks = true,
+            linkcolor = awesome-concrete,
+            urlcolor  = awesome-concrete,
+            citecolor = awesome-concrete,
+            anchorcolor = awesome-concrete,
+            unicode]{hyperref}
+% \RequirePackage[hidelinks,unicode]{hyperref}
+
+
 \hypersetup{%
   pdftitle={},
   pdfauthor={},
@@ -220,6 +228,12 @@
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+
+% For elements of publication
+\newcommand*{\publicationtitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\publicationdatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\publicationauthorstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{graytext} #1}}
+\newcommand*{\publicationvenuestyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\itshape\color{text} #1}}
 
 % For elements of the cover letter
 \newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
@@ -665,6 +679,27 @@
       \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
     \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
   \end{tabular*}%
+}
+
+% Define an environment for publications
+\newenvironment{cvpublications}{%}
+  \vspace{\acvSectionContentTopSkip}
+  \begin{center}
+}{%
+  \end{center}
+}
+
+% Define a publication entry
+% Usage: \cvpublicationentry{<title>}{<authors>}{<venue>}{<date>}
+\newcommand*{\cvpublicationentry}[4]{%
+  \vspace{-1.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth-1cm} R{1cm}}
+    \publicationtitlestyle{#1} & \publicationdatestyle{#4} \\ [-0.3ex]
+    \publicationauthorstyle{#2} & \\ [-0.3ex]
+    \publicationvenuestyle{#3} &
+  \end{tabular*}
 }
 
 % Define an environment for cvsubentry
